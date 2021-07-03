@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # Download clang and kernel source
-git clone --depth=1 https://github.com/AtomicXZ/android_kernel_xiaomi_phoenix.git -b LA.UM.9.1.r1-x kernel
-cd kernel
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
+git clone --depth=1 https://github.com/2e-dev/AnyKernel3-1 -b phoenix AnyKernel
 
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 DTBO=$(pwd)/out/arch/arm64/boot/dtbo.img
@@ -13,8 +12,6 @@ CLANG_VERSION=$(clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)/
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 export ARCH=arm64
-export KBUILD_BUILD_HOST="NightBlade"
-export KBUILD_BUILD_USER="YuanziX"
 export PATH=$PWD/clang/bin:$PATH
 
 # Info
@@ -71,7 +68,7 @@ fi
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 NightBlade-phoenix-${BRANCH}-${TANGGAL}.zip *
+    zip -r9 Cartel-phoenix-${BRANCH}-${TANGGAL}.zip *
     cd ..
 }
 sendinfo
